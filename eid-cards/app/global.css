@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #FDFBF7;
+}
+
+body {
+  background-color: var(--background);
+  color: #4A4A4A;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 50;
+  background-image: url("https://www.transparenttextures.com/patterns/p6.png");
+}
