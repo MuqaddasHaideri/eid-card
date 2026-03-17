@@ -1,6 +1,7 @@
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
-
 [build]
+  base = "eid-cards"
   command = "npm run build"
   publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
