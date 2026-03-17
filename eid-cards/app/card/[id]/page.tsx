@@ -61,9 +61,9 @@ export default async function CardPage({ params }: { params: Promise<{ id: strin
           Create your own e-EidCard
         </Link>
         
-        <p className="text-[10px] text-slate-300 tracking-tighter uppercase font-bold">
+        {/* <p className="text-[10px] text-slate-300 tracking-tighter uppercase font-bold">
           Developed by Muqaddas Haideri
-        </p>
+        </p> */}
       </div>
     </main>
   );

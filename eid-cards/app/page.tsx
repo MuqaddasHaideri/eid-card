@@ -19,7 +19,10 @@ const PRESET_WISHES = [
   { id: 2, text: "Wishing you an Eid filled with the smell of jasmine and old memories. Have a blessed day!" },
   { id: 3, text: "Eid Mubarak! Now stop reading this and go bring me my Eidi. 😂" },
   { id: 4, text: "May this Eid bring you closer to the ones who make your soul smile. Sending love!" },
-  { id: 5, text: "A nostalgic wish for a modern day. May your Eid be as beautiful as a childhood memory." }
+  { id: 5, text: "A nostalgic wish for a modern day. May your Eid be as beautiful as a childhood memory." },
+  { id: 6, text: "ڈبے میں ڈبہ، ڈبے میں انجکشن، عید والے دن دیکھنا میری دوست کے ایکشن" },
+  { id: 7, text: "آم کے رس کو جوس کہتے ہیں، جو عید کارڈ نہ بھیجے اسے کنجوس کہتے ہیں" },
+  { id: 8, text: "میرے ہاتھ میں پھول ہے کوئی اسلحہ تو نہیں، ایڈوانس عید مبارک بول دوں کوئی مسئلہ تو نہیں" }
 ];
 
 const COVERS = [
