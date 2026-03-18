@@ -36,6 +36,10 @@ const COVERS = [
   { id: 8, name: "Pink Lantern Dream", image: "/cover8.png" },
   { id: 9, name: "Geometric Gold Pattern", image: "/cover9.png" },
   { id: 10, name: "Eid Meowbarak Cat", image: "/cover10.png" },
+  { id: 11, name: "Sage Mosque Silhouette", image: "/cover11.jpeg" },
+  { id: 12, name: "Floral Pastels & Lanterns", image: "/cover12.jpeg" },
+  { id: 13, name: "Monochrome Palms & Lanterns", image: "/cover13.jpeg" },
+  { id: 14, name: "Midnight Botanical", image: "/cover14.png" },
 ];
 
 export default function HomePage() {
@@ -133,7 +137,7 @@ export default function HomePage() {
                 <p className="text-center mt-3 text-xs font-medium text-slate-600 italic">{COVERS[themeIndex].name}</p>
               </div>
 
-              {/* Names - FIXED COLOR HERE */}
+              {/* Names */}
               <div className="flex gap-4">
                   <div className="flex-1">
                     <label className="text-[9px] uppercase tracking-widest text-gray-400 ml-2 mb-1 block">From</label>
@@ -153,7 +157,7 @@ export default function HomePage() {
                   </div>
               </div>
 
-              {/* Wishes - FIXED COLOR HERE */}
+              {/* Wishes  */}
               <div className="bg-gray-50 rounded-[2rem] p-6 border border-gray-100">
                 <label className="text-[9px] uppercase tracking-widest text-gray-400 mb-4 block text-center font-bold">2. Choose a Wish</label>
                 <div className="flex items-center justify-between gap-2">

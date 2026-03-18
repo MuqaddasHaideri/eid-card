@@ -15,13 +15,11 @@ export default function EidCard({ receiver, message, sender, themeId }: any) {
 
   return (
     <div className="flex flex-col items-center justify-center w-full p-4">
-      {/* The Container */}
       <div
         className="relative w-full max-w-[320px] h-[460px] cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
         style={{ perspective: "2500px" }}
       >
-        {/* THE BACK PAGE (The one that stays still) */}
         <div className="absolute inset-0 w-full h-full bg-[#fdfdfd] rounded-2xl shadow-lg border border-gray-100 p-10 flex flex-col justify-center text-center">
           <div className="space-y-4">
             <h3 className="text-amber-600 font-playfair text-lg tracking-widest uppercase mb-2">
@@ -37,20 +35,18 @@ export default function EidCard({ receiver, message, sender, themeId }: any) {
               <p className="text-xl font-playfair text-gray-900">{sender || "Someone"}</p>
             </div>
           </div>
-          {/* Spine Shadow Effect */}
           <div className="absolute top-0 left-0 w-4 h-full bg-gradient-to-r from-black/5 to-transparent rounded-l-2xl" />
         </div>
 
-        {/* THE FRONT COVER (The one that flips) */}
         <motion.div
           className="w-full h-full relative z-30"
           style={{
             transformStyle: "preserve-3d",
-            transformOrigin: "left" // This makes it flip like a book/card
+            transformOrigin: "left" 
           }}
           animate={{
             rotateY: isOpen ? -110 : 0,
-            x: isOpen ? 15 : 0 // Subtle shift to keep it centered when open
+            x: isOpen ? 15 : 0 
           }}
           transition={{ duration: 1.5, ease: [0.4, 0, 0.2, 1] }}
         >
@@ -67,7 +63,7 @@ export default function EidCard({ receiver, message, sender, themeId }: any) {
             </div>
           </div>
 
-          {/* INNER COVER FACE (What you see on the left side when card is open) */}
+          {/* INNER COVER FACE  */}
           <div
             className="absolute inset-0 w-full h-full bg-[#fcfcfc] rounded-2xl z-10"
             style={{
@@ -76,7 +72,7 @@ export default function EidCard({ receiver, message, sender, themeId }: any) {
               transform: "rotateY(180deg)"
             }}
           >
-            {/* This adds a "paper" look to the back of the cover */}
+            {/* paper look to the back of the cover */}
             <div className="w-full h-full bg-gradient-to-l from-black/5 to-transparent rounded-2xl opacity-50" />
             <div className="absolute inset-0 flex items-center justify-center opacity-10 grayscale">
               <img src={coverImage} className="w-24 h-24 object-contain" alt="" />

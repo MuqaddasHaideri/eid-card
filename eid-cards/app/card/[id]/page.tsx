@@ -30,14 +30,14 @@ export default async function CardPage({ params }: { params: Promise<{ id: strin
   return (
     <main className="min-h-screen bg-[#FDFBF7] flex flex-col items-center justify-between py-12 px-6">
       
-      {/* 1. Header Hint for Friend */}
+      {/*  Header */}
       <div className="text-center animate-bounce mt-4">
         <span className="bg-amber-100 text-amber-800 px-4 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase shadow-sm">
           ✨ Tap the card to open ✨
         </span>
       </div>
 
-      {/* 2. The Card Container */}
+      {/* Card Container */}
       <div className="flex-1 flex items-center justify-center w-full max-w-lg">
         <EidCard 
           receiver={card.receiver_name} 
@@ -47,7 +47,7 @@ export default async function CardPage({ params }: { params: Promise<{ id: strin
         />
       </div>
 
-      {/* 3. Footer: Create Your Own Card */}
+      {/* Footer */}
       <div className="w-full max-w-md text-center mt-12 mb-8 space-y-4">
         <p className="text-slate-400 text-xs italic font-playfair">
           Liked this? Send a greeting back to {card.sender_name}!
