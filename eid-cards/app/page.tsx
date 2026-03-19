@@ -15,14 +15,15 @@ const supabase = createClient(
 );
 
 const PRESET_WISHES = [
-  { id: 1, text: "May your heart be as light as the moon and your day as sweet as the dates. Eid Mubarak!" },
-  { id: 2, text: "Wishing you an Eid filled with the smell of jasmine and old memories. Have a blessed day!" },
-  { id: 3, text: "Eid Mubarak! Now stop reading this and go bring me my Eidi. 😂" },
+  { id: 1, text: "May this special day bring peace, happiness, and prosperity to you and your family." },
+  { id: 2, text: "May Allah accept your prayers, reward your patience and bless you beyond what you asked for." },
+  { id: 3, text: "May Allah accept all your duas and bless you and your family with immense happiness." },
   { id: 4, text: "May this Eid bring you closer to the ones who make your soul smile. Sending love!" },
-  { id: 5, text: "A nostalgic wish for a modern day. May your Eid be as beautiful as a childhood memory." },
+  { id: 5, text: "May the colors and joy of Eid brighten your day and fill your life with happiness." },
   { id: 6, text: "ڈبے میں ڈبہ، ڈبے میں انجکشن، عید والے دن دیکھنا میری دوست کے ایکشن" },
   { id: 7, text: "آم کے رس کو جوس کہتے ہیں، جو عید کارڈ نہ بھیجے اسے کنجوس کہتے ہیں" },
-  { id: 8, text: "میرے ہاتھ میں پھول ہے کوئی اسلحہ تو نہیں، ایڈوانس عید مبارک بول دوں کوئی مسئلہ تو نہیں" }
+  { id: 8, text: "میرے ہاتھ میں پھول ہے کوئی اسلحہ تو نہیں، ایڈوانس عید مبارک بول دوں کوئی مسئلہ تو نہیں" },
+
 ];
 
 const COVERS = [
@@ -40,6 +41,7 @@ const COVERS = [
   { id: 12, name: "Floral Pastels & Lanterns", image: "/cover12.jpeg" },
   { id: 13, name: "Monochrome Palms & Lanterns", image: "/cover13.jpeg" },
   { id: 14, name: "Midnight Botanical", image: "/cover14.png" },
+  { id: 15, name: "Dreamy Marble Mosque", image: "/cover15.jpeg" },
 ];
 
 export default function HomePage() {
@@ -57,18 +59,27 @@ export default function HomePage() {
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const nextTheme = () => {
-    const i = (themeIndex + 1) % COVERS.length;
-    setThemeIndex(i);
-    setFormData({ ...formData, themeId: COVERS[i].id });
-  };
-  
-  const prevTheme = () => {
-    const i = (themeIndex - 1 + COVERS.length) % COVERS.length;
-    setThemeIndex(i);
-    setFormData({ ...formData, themeId: COVERS[i].id });
-  };
 
+useEffect(() => {
+  setFormData(prev => ({ ...prev, themeId: COVERS[themeIndex].id }));
+}, [themeIndex]);
+
+const nextTheme = () => {
+  setThemeIndex((prev) => (prev + 1) % COVERS.length);
+};
+  // const nextTheme = () => {
+  //   const i = (themeIndex + 1) % COVERS.length;
+  //   setThemeIndex(i);
+  //   setFormData({ ...formData, themeId: COVERS[i].id });
+  // };
+const prevTheme = () => {
+  setThemeIndex((prev) => (prev - 1 + COVERS.length) % COVERS.length);
+};
+  // const prevTheme = () => {
+  //   const i = (themeIndex - 1 + COVERS.length) % COVERS.length;
+  //   setThemeIndex(i);
+  //   setFormData({ ...formData, themeId: COVERS[i].id });
+  // };
   const nextWish = () => {
     const i = (wishIndex + 1) % PRESET_WISHES.length;
     setWishIndex(i);
@@ -142,6 +153,7 @@ export default function HomePage() {
                   <div className="flex-1">
                     <label className="text-[9px] uppercase tracking-widest text-gray-400 ml-2 mb-1 block">From</label>
                     <input 
+                   value={formData.sender || ''}
                       placeholder="Your Name" 
                       className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:ring-1 focus:ring-amber-200 transition text-sm text-slate-900 placeholder:text-gray-400" 
                       onChange={(e) => setFormData({...formData, sender: e.target.value})} 
@@ -150,6 +162,7 @@ export default function HomePage() {
                   <div className="flex-1">
                     <label className="text-[9px] uppercase tracking-widest text-gray-400 ml-2 mb-1 block">To</label>
                     <input 
+                    value={formData.receiver || ''}
                       placeholder="Friend's Name" 
                       className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:ring-1 focus:ring-amber-200 transition text-sm text-slate-900 placeholder:text-gray-400" 
                       onChange={(e) => setFormData({...formData, receiver: e.target.value})} 
