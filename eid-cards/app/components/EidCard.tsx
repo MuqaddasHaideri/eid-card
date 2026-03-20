@@ -5,11 +5,17 @@ import { motion } from "framer-motion";
 export default function EidCard({ receiver, message, sender, themeId }: any) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const getCoverImage = (id: number) => {
-    if (id === 1) return "/cover1.png";
-    if (id >= 2 && id <= 5) return `/cover${id}.jpeg`;
-    return `/cover${id}.png`;
-  };
+const getCoverImage = (id: number) => {
+  // IDs that are explicitly .jpeg in your list
+  const jpegIds = [2, 3, 4, 5,11, 12, 13,15];
+
+  if (jpegIds.includes(id)) {
+    return `/cover${id}.jpeg`;
+  }
+
+  // Everything else (1, 6, 7, 8, 9, 10, 14) is .png
+  return `/cover${id}.png`;
+};
 
   const coverImage = getCoverImage(themeId);
 
