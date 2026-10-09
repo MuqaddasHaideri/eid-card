@@ -1,23 +1,23 @@
-import { createClient } from '@supabase/supabase-js';
-import EidCard from '@/app/components/EidCard';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PlusCircle } from 'lucide-react';
+import GreetingCard from '@/app/components/GreetingCard';
+import { cardsApi } from '@/app/lib/api';
+import { occasionOrDefault } from '@/app/data/occasions';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+type Params = { params: Promise<{ id: string }> };
 
-export default async function CardPage({ params }: { params: Promise<{ id: string }> }) {
-  
-  const resolvedParams = await params;
-  const cardId = resolvedParams.id;
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const { id } = await params;
+  const card = await cardsApi.getById(id);
+  if (!card) return { title: 'Card not found' };
+  const occ = occasionOrDefault(card.occasion);
+  return { title: `${occ.cardTitle} from ${card.sender}`, description: `${card.sender} sent you a card. Tap to open it!` };
+}
 
-  const { data: card } = await supabase
-    .from('cards')
-    .select('*')
-    .eq('id', cardId) 
-    .single();
+export default async function CardPage({ params }: Params) {
+  const { id } = await params;
+  const card = await cardsApi.getById(id);
 
   if (!card) {
     return (
@@ -27,43 +27,32 @@ export default async function CardPage({ params }: { params: Promise<{ id: strin
     );
   }
 
+  const occ = occasionOrDefault(card.occasion);
+
   return (
     <main className="min-h-screen bg-[#FDFBF7] flex flex-col items-center justify-between py-12 px-6">
-      
-      {/*  Header */}
       <div className="text-center animate-bounce mt-4">
         <span className="bg-amber-100 text-amber-800 px-4 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase shadow-sm">
           ✨ Tap the card to open ✨
         </span>
       </div>
 
-      {/* Card Container */}
       <div className="flex-1 flex items-center justify-center w-full max-w-lg">
-        <EidCard 
-          receiver={card.receiver_name} 
-          message={card.message} 
-          sender={card.sender_name}
-          themeId={card.theme_id}
-        />
+        <GreetingCard receiver={card.receiver} message={card.message} sender={card.sender} themeId={card.themeId} occasion={card.occasion} />
       </div>
 
-      {/* Footer */}
       <div className="w-full max-w-md text-center mt-12 mb-8 space-y-4">
-        <p className="text-slate-400 text-xs italic font-playfair">
-          Liked this? Send a greeting back to {card.sender_name}!
+        <p className="text-slate-400 text-xs italic font-playfair" dir="auto">
+          Liked this? Send a greeting back to {card.sender}!
         </p>
-        
-        <Link 
-          href="/"
-          className="w-full inline-flex items-center justify-center gap-2 bg-[#344D41] text-white p-4 rounded-2xl font-medium shadow-xl hover:bg-[#2a3d34] transition-all transform active:scale-95"
+        <Link
+          href={`/create/${occ.id}`}
+          style={{ backgroundColor: occ.accent }}
+          className="w-full inline-flex items-center justify-center gap-2 text-white p-4 rounded-2xl font-medium shadow-xl hover:opacity-90 transition-all transform active:scale-95"
         >
           <PlusCircle size={20} />
-          Create your own e-EidCard
+          Create your own card
         </Link>
-        
-        {/* <p className="text-[10px] text-slate-300 tracking-tighter uppercase font-bold">
-          Developed by Muqaddas Haideri
-        </p> */}
       </div>
     </main>
   );
