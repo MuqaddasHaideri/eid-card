@@ -28,4 +28,5 @@ export const COVERS: Cover[] = [
 
 export const coversFor = (occasion: OccasionId) => COVERS.filter((c) => c.occasion === occasion);
 
+
 export const getCover = (id: number) => COVERS.find((c) => c.id === id) ?? COVERS[0];
